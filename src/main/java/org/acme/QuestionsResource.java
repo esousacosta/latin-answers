@@ -2,19 +2,19 @@ package org.acme;
 
 import jakarta.inject.Inject;
 import jakarta.validation.constraints.Min;
-import jakarta.ws.rs.GET;
-import jakarta.ws.rs.Path;
-import jakarta.ws.rs.PathParam;
-import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 @Path("/questions")
 @Produces(MediaType.APPLICATION_JSON)
+@Consumes(MediaType.APPLICATION_JSON)
 public class QuestionsResource {
     @Inject
     QuestionService questionService;
@@ -48,5 +48,13 @@ public class QuestionsResource {
             return Response.noContent().build();
         }
         return Response.ok(questionsCount).build();
+    }
+
+
+    @POST
+    public Response createQuestion(Question question) throws URISyntaxException {
+        Question q = questionService.insertQuestion(question);
+        // Reminder: if I don't build the <entity>, I have no body of the response.
+        return Response.created(URI.create("/" + q.id)).entity(q).build();
     }
 }

@@ -41,4 +41,12 @@ public class QuestionService {
         }
         return questionsCount;
     }
+
+    @Transactional(REQUIRED)
+    public Question insertQuestion(Question question) {
+        logger.info("[PUT] Trying to add a question to the database...");
+        em.persist(question);
+        logger.info("[PUT] Question added to the db: " + question.text);
+        return question;
+    }
 }
