@@ -1,12 +1,15 @@
 package org.acme;
 
 import jakarta.inject.Inject;
+import jakarta.validation.constraints.Min;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
+import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import org.eclipse.microprofile.openapi.annotations.Operation;
+import org.eclipse.microprofile.openapi.annotations.parameters.Parameter;
 
 import java.util.List;
 
@@ -28,7 +31,22 @@ public class QuestionsResource {
 
     @GET
     @Path("/{id}")
-    public Response getSingleQuestion() {
-        return Response.ok("returns a single question that was fetched by its id").build();
+    public Response getQuestion(@Parameter(description = "id of the question to look for") @PathParam("id") @Min(1) long id) {
+        Question q = questionService.getQuestion(id);
+        if (q == null) {
+            return Response.noContent().build();
+        }
+        return Response.ok(Question.class, MediaType.APPLICATION_JSON).entity(q).build();
+    }
+
+    @GET
+    @Path("/count")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response countQuestions() {
+        Long questionsCount= questionService.countQuestions();
+        if (questionsCount == 0) {
+            return Response.noContent().build();
+        }
+        return Response.ok(questionsCount).build();
     }
 }
