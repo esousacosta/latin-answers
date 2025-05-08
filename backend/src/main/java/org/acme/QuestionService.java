@@ -22,18 +22,18 @@ public class QuestionService {
     EntityManager em;
 
     public List<Question> getQuestions() {
-        logger.info("[GET] Getting all question from the DB...");
+        logger.info("[DB-service] Getting all question from the DB...");
         return em.createQuery("SELECT q from Question q", Question.class).getResultList();
     }
 
     @Transactional(REQUIRED)
     public Question getQuestion(long id) {
-        logger.info("[GET] Getting question with id " + id + "...");
+        logger.info("[DB-service] Getting question with id " + id + "...");
         return em.createQuery("SELECT q from Question q WHERE q.id = :id", Question.class).setParameter("id", id).getSingleResult();
     }
 
     public Long countQuestions() {
-        logger.info("[GET] Getting the total number of questions in the db...");
+        logger.info("[DB-service] Getting the total number of questions in the db...");
         TypedQuery<Long> countQuery = em.createQuery("SELECT COUNT(q) from Question q", Long.class);
         Long questionsCount = countQuery.getSingleResult();
         if (questionsCount == 0) {
@@ -44,9 +44,19 @@ public class QuestionService {
 
     @Transactional(REQUIRED)
     public Question insertQuestion(Question question) {
-        logger.info("[POST] Trying to add a question to the database...");
+        logger.info("[DB-service] Trying to add a question to the database...");
         em.persist(question);
-        logger.info("[POST] Question added to the db: " + question.text);
+        logger.info("[DB-service] Question added to the db: " + question.text);
         return question;
+    }
+
+    public Long countLessons() {
+        logger.info("[DB-service] Getting the total number of lessons in the db...");
+        TypedQuery<Long> countLessonsQuery = em.createQuery("SELECT COUNT(distinct q.lesson) FROM Question q", Long.class);
+        Long lessonsCount = countLessonsQuery.getSingleResult();
+        if (lessonsCount == 0) {
+            logger.info("No lessons in the questions db...");
+        }
+        return lessonsCount;
     }
 }

@@ -70,6 +70,23 @@ public class QuestionsResource {
     }
 
 
+    @GET
+    @Path("/countLessons")
+    @Produces(MediaType.TEXT_PLAIN)
+    @Operation(summary = "Return the total number of lessons stored in the db")
+    @APIResponse(responseCode = "200",
+            description = "Lessons found in the db",
+            content = @Content(mediaType = MediaType.TEXT_PLAIN,
+                    schema = @Schema(implementation = Long.class)))
+    public Response countLessons() {
+        Long lessonsCount = questionService.countLessons();
+        if (lessonsCount == 0) {
+            return Response.noContent().build();
+        }
+        return Response.ok(lessonsCount).build();
+    }
+
+
     @POST
     @Operation(summary = "Adds a question to the database")
     @APIResponse(responseCode = "201",
