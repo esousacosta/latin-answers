@@ -1,0 +1,3 @@
+org\acme\QuestionService.class
+org\acme\QuestionsResource.class
+org\acme\Question.class
