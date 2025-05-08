@@ -44,9 +44,9 @@ public class QuestionService {
 
     @Transactional(REQUIRED)
     public Question insertQuestion(Question question) {
-        logger.info("[PUT] Trying to add a question to the database...");
+        logger.info("[POST] Trying to add a question to the database...");
         em.persist(question);
-        logger.info("[PUT] Question added to the db: " + question.text);
+        logger.info("[POST] Question added to the db: " + question.text);
         return question;
     }
 }
