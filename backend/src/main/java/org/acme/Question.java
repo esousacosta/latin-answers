@@ -33,4 +33,6 @@ public class Question extends PanacheEntity {
     public String text;
     @JsonbProperty("answer")
     public String answer;
+    @JsonbProperty("lesson")
+    public String lesson;
 }

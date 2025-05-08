@@ -4,7 +4,7 @@
 -- insert into myentity (id, field) values(2, 'field-2');
 -- insert into myentity (id, field) values(3, 'field-3');
 -- alter sequence myentity_seq restart with 4;
-INSERT INTO T_QUESTION (id, text, answer) VALUES (1001, 'Translate: rosa', 'rose');
-INSERT INTO T_QUESTION (id, text, answer) VALUES (1002, 'Translate: agricola', 'farmer');
-INSERT INTO T_QUESTION (id, text, answer) VALUES (1003, 'Translate: puella', 'girl');
-INSERT INTO T_QUESTION (id, text, answer) VALUES (1004, 'Translate: nauta', 'sailor');
+INSERT INTO T_QUESTION (id, text, answer, lesson) VALUES (1001, 'Translate: rosa', 'rose', '1');
+INSERT INTO T_QUESTION (id, text, answer, lesson) VALUES (1002, 'Translate: agricola', 'farmer', '1');
+INSERT INTO T_QUESTION (id, text, answer, lesson) VALUES (1003, 'Translate: puella', 'girl', '2');
+INSERT INTO T_QUESTION (id, text, answer, lesson) VALUES (1004, 'Translate: nauta', 'sailor', '2');

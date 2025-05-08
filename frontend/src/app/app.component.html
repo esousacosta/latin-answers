@@ -1,10 +1,13 @@
+<app-navbar></app-navbar>
+
 <h1>Latin Grammar Questions</h1>
 <ul>
   @for (question of questions; track question.id) {
   <li>
     <strong>{{ question.text }}</strong
     ><br />
-    Answer: {{ question.answer }}
+    Answer: {{ question.answer }}<br />
+    Lesson number: {{ question.lesson }}
   </li>
   }
 </ul>
