@@ -14,4 +14,8 @@ export class QuestionService {
   getQuestions(): Observable<Question[]> {
     return this.http.get<Question[]>(this.apiUrl);
   }
+
+  getLessons(): Observable<number> {
+    return this.http.get<number>(this.apiUrl + '/countLessons');
+  }
 }

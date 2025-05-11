@@ -1,0 +1,11 @@
+li {
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+
+li:hover {
+  background-color: #f5f5f5;
+}

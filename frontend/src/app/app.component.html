@@ -1,13 +1,19 @@
 <app-navbar></app-navbar>
 
 <h1>Latin Grammar Questions</h1>
+<div>Total number of lessons: {{ lessonsNb }}</div>
 <ul>
-  @for (question of questions; track question.id) {
-  <li>
-    <strong>{{ question.text }}</strong
+  @for (qv of questions; track qv.question.id) {
+  <li (click)="toggleAnswer(qv)" style="cursor: pointer">
+    <strong>{{ qv.question.text }}</strong
     ><br />
-    Answer: {{ question.answer }}<br />
-    Lesson number: {{ question.lesson }}
+
+    @if (qv.showAnswer) {
+    <div>
+      Answer: {{ qv.question.answer }}<br />
+      Lesson number: {{ qv.question.lesson }}
+    </div>
+    }
   </li>
   }
 </ul>
