@@ -3,4 +3,6 @@ export interface Question {
   text: string;
   answer: string;
   lesson: string;
+  lesson_type: string;
+  number: number;
 }

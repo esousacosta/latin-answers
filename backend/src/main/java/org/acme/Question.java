@@ -4,6 +4,7 @@ import io.quarkus.hibernate.orm.panache.PanacheEntity;
 import io.smallrye.common.constraint.NotNull;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import jakarta.json.bind.annotation.JsonbProperty;
 
 
@@ -35,4 +36,9 @@ public class Question extends PanacheEntity {
     public String answer;
     @JsonbProperty("lesson")
     public String lesson;
+    @JsonbProperty("lesson_type")
+    @Column(name = "lesson_type")
+    public String lessonType;
+    @JsonbProperty("number")
+    public int number;
 }
